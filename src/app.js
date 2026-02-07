@@ -14,13 +14,9 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
-app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'success', message: 'Server is healthy!' });
-});
-
 app.use('/api/v1', apiRoutes);
 
-app.all(/'*'/, (req, res, next) => {
+app.all('*all', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 

@@ -23,5 +23,9 @@ pool.on('error', (err) => {
   process.exit(-1);
 });
 
-export const query = (text, params) => pool.query(text, params);
-export { pool };
+const db = {
+  query: (text, params) => pool.query(text, params),
+  pool
+};
+
+export default db;
