@@ -82,9 +82,7 @@ export const login = async ({ email, password, ipAddress, deviceInfo }) => {
     const jti = uuidv4();
     const accessToken = signAccessToken({ userId: user.id, role: user.role });
     const refreshToken = signRefreshToken(user.id, jti);
-
     const expiresAt = new Date(Date.now() + Number(process.env.JWT_REFRESH_EXPIRES_MS));
-
     const session = await repository.createSession(
       {
         userId: user.id,
@@ -100,6 +98,8 @@ export const login = async ({ email, password, ipAddress, deviceInfo }) => {
     if (!session) {
       throw new AppError(AUTH_MESSAGES.SESSION_CREATE_FAILED, 500);
     }
+
+    await repository.setLastLogin({ userId: user.id }, client);
 
     await client.query("COMMIT");
     logger.info("Login transaction committed", { userId: user.id });
@@ -122,3 +122,18 @@ export const login = async ({ email, password, ipAddress, deviceInfo }) => {
     client.release();
   }
 };
+
+export const getProfile = async (userId) => {
+  const profile = await repository.findById(userId);
+  if(!profile) {
+    throw new AppError(AUTH_MESSAGES.USER_NOT_FOUND, 500);
+  }
+
+  const roleName = await repository.findUserRoleName(userId);
+
+  await repository.setLastLogin({ userId: userId }).catch(console.error);
+  return {
+    user: profile,
+    role: roleName
+  };
+}

@@ -7,7 +7,8 @@ export const AUTH_MESSAGES = {
   PASSWORD_MISMATCH: 'Password mismatch',
   DEFAULT_ROLE_NOT_FOUND: 'Default role not found. Please contact administrator',
   INVALID_CREDENTIALS: 'Invalid credentials',
-  SESSION_CREATE_FAILED: 'Session create failed'
+  SESSION_CREATE_FAILED: 'Session create failed',
+  USER_NOT_FOUND: 'User not found'
 };
 
 export const VALIDATION_MESSAGES = {

@@ -1,6 +1,6 @@
 import { verifyToken } from '../utils/jwtHelper.js';
 import AppError from '../utils/appError.js';
-import * as userRepository from '../../modules/users/user.repository.js';
+import * as repository from '../../modules/auth/repository.js';
 
 export const authenticate = async (req, res, next) => {
     try {
@@ -16,7 +16,7 @@ export const authenticate = async (req, res, next) => {
         const decoded = verifyToken(token, process.env.JWT_ACCESS_SECRET);
 
         // 3. Check if user still exists (in case user was deleted after token issuance)
-        const currentUser = await userRepository.findById(decoded.sub);
+        const currentUser = await repository.findById(decoded.sub.userId);
 
         if (!currentUser) {
             throw new AppError('The user associated with this token no longer exists.', 401);
