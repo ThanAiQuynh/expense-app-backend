@@ -2,6 +2,10 @@ export const AUTH_MESSAGES = {
   REGISTER_SUCCESS: 'Registration successful',
   REQUIRED_FIELDS: 'All required fields are required',
   EMAIL_ALREADY_EXIST: 'Email already exist',
+  LOGIN_SUCCESS: 'Login successful',
+  EMAIL_NOT_FOUND: 'Email not found',
+  PASSWORD_MISMATCH: 'Password mismatch',
+  DEFAULT_ROLE_NOT_FOUND: "Default role not found. Please contact administrator"
 };
 
 export const VALIDATION_MESSAGES = {
@@ -11,3 +15,7 @@ export const VALIDATION_MESSAGES = {
   PASSWORD_REQUIRED: 'Password is required',
   FULLNAME_REQUIRED: 'Full name is required'
 };
+
+export const ROLES = {
+  DEFAULT_ROLE: 'user'
+}
