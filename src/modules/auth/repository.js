@@ -45,3 +45,17 @@ export const assignRole = async ({ userId, roleId }, client = null) => {
     const { rows } = await (client || db).query(sql, values);
     return rows.length > 0;
 }
+
+export const createSession = async (
+    { userId, jti, refreshToken, deviceInfo, ipAddress, expiresAt }, 
+    client = null
+) => {
+    const sql = `
+        INSERT INTO user_sessions (user_id, jti, refresh_token, device_info, ip_address, expires_at)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *;
+    `;
+    const values = [userId, jti, refreshToken, deviceInfo, ipAddress, expiresAt];
+    const { rows } = await (client || db).query(sql, values);
+    return rows.length > 0;
+}

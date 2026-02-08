@@ -5,7 +5,9 @@ export const AUTH_MESSAGES = {
   LOGIN_SUCCESS: 'Login successful',
   EMAIL_NOT_FOUND: 'Email not found',
   PASSWORD_MISMATCH: 'Password mismatch',
-  DEFAULT_ROLE_NOT_FOUND: "Default role not found. Please contact administrator"
+  DEFAULT_ROLE_NOT_FOUND: 'Default role not found. Please contact administrator',
+  INVALID_CREDENTIALS: 'Invalid credentials',
+  SESSION_CREATE_FAILED: 'Session create failed'
 };
 
 export const VALIDATION_MESSAGES = {
